@@ -15,7 +15,6 @@ const Dashboard = () => {
       <Navbar />
       <Search />
       <UserInfo />
-      <h1>{ctx}</h1>
       <User />
       <Repos />
     </main>

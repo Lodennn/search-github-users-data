@@ -5,9 +5,7 @@ import { GoRepo, GoGist } from "react-icons/go";
 import { FiUsers, FiUserPlus } from "react-icons/fi";
 
 const UserInfo = () => {
-  <GithubContext.Consumer>
-    {(ctx) => <h2>user info component - {ctx}</h2>}
-  </GithubContext.Consumer>;
+  return <h2>user info component</h2>;
 };
 
 const Wrapper = styled.section`
