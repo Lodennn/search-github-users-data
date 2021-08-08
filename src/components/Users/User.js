@@ -4,7 +4,14 @@ import Card from "../UI/Card";
 import Followers from "../Followers/Followers";
 
 const User = () => {
-  return <h2>user component</h2>;
+  return (
+    <section className="section">
+      <Wrapper className="section-center">
+        <Card />
+        <Followers />
+      </Wrapper>
+    </section>
+  );
 };
 
 const Wrapper = styled.div`
