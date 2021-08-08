@@ -4,14 +4,16 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
-import { GithubProvider } from "./context/context";
+import GithubProvider from "./context/context";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <GithubProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </GithubProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
