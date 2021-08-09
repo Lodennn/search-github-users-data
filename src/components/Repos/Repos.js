@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import DoughnutChart from "../Charts/Doughnut2d";
 
 import ExampleChart from "../Charts/ExampleChart";
 import PieChart from "../Charts/Pie3D";
@@ -10,6 +11,7 @@ const Repos = () => {
       <Wrapper className="section-center">
         <PieChart />
         <ExampleChart />
+        <DoughnutChart />
       </Wrapper>
     </section>
   );
