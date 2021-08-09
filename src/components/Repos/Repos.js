@@ -5,6 +5,8 @@ import { GithubContext } from "../../context/context";
 
 import ExampleChart from "../Charts/ExampleChart";
 import PieChart from "../Charts/Pie3D";
+import ColumnChart from "../Charts/Column3D";
+import BarChart from "../Charts/Bar3D";
 
 const Repos = () => {
   const { repos } = useContext(GithubContext);
@@ -37,6 +39,13 @@ const Repos = () => {
     return sortedData;
   };
 
+  // DUMMY DATA
+  const DUMMY_DATA = [
+    { label: "HTML", value: 10 },
+    { label: "CSS", value: 60 },
+    { label: "JavaScript", value: 120 },
+  ];
+
   // moust used
   const mostUsed = sortBy(chartData, "value");
   console.log(mostUsed);
@@ -52,8 +61,9 @@ const Repos = () => {
     <section className="section">
       <Wrapper className="section-center">
         <PieChart chartdata={mostUsed} />
-        <ExampleChart chartdata={mostUsed} />
+        <ColumnChart chartdata={mostUsed} />
         <DoughnutChart chartdata={mostPopular} />
+        <BarChart chartdata={mostUsed} />
       </Wrapper>
     </section>
   );
