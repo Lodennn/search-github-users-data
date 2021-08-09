@@ -8,38 +8,11 @@ import FusionCharts from "fusioncharts";
 import Chart from "fusioncharts/fusioncharts.charts";
 // Include the theme as fusion
 import CandyTheme from "fusioncharts/themes/fusioncharts.theme.candy";
-// Context
-import { GithubContext } from "../../context/context";
 
 // Adding the chart and theme as dependency to the core fusioncharts
 ReactFC.fcRoot(FusionCharts, Chart, CandyTheme);
 
-const DoughnutChart = () => {
-  const { repos } = useContext(GithubContext);
-
-  // 1st Approach
-  let chartData = repos.reduce((acc, item) => {
-    const { language } = item;
-    if (!language) return;
-
-    if (!acc[language]) {
-      acc[language] = {
-        label: language,
-        value: 1,
-      };
-    } else {
-      acc[language] = {
-        ...acc[language],
-        value: acc[language].value + 1,
-      };
-    }
-    return acc;
-  }, {});
-
-  chartData = Object.values(chartData)
-    .sort((a, b) => b.value - a.value)
-    .slice(0, 5);
-
+const DoughnutChart = (props) => {
   const chartConfigs = {
     type: "doughnut2d", // The chart type
     width: "100%", // Width of the chart
@@ -54,7 +27,7 @@ const DoughnutChart = () => {
         showPercentValues: 0,
       },
       // Chart Data
-      data: chartData,
+      data: props.chartdata,
     },
   };
   return <ReactFC {...chartConfigs} />;

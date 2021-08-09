@@ -14,32 +14,7 @@ import { GithubContext } from "../../context/context";
 // Adding the chart and theme as dependency to the core fusioncharts
 ReactFC.fcRoot(FusionCharts, Chart, FusionTheme);
 
-const ExampleChart = () => {
-  const { repos } = useContext(GithubContext);
-
-  // 1st Approach
-  let chartData = repos.reduce((acc, item) => {
-    const { language } = item;
-    if (!language) return;
-
-    if (!acc[language]) {
-      acc[language] = {
-        label: language,
-        value: 1,
-      };
-    } else {
-      acc[language] = {
-        ...acc[language],
-        value: acc[language].value + 1,
-      };
-    }
-    return acc;
-  }, {});
-
-  chartData = Object.values(chartData)
-    .sort((a, b) => b.value - a.value)
-    .slice(0, 5);
-
+const ExampleChart = (props) => {
   const chartConfigs = {
     type: "column2d", // The chart type
     width: "100%", // Width of the chart
@@ -61,7 +36,7 @@ const ExampleChart = () => {
         theme: "fusion",
       },
       // Chart Data
-      data: chartData,
+      data: props.chartdata,
     },
   };
   return <ReactFC {...chartConfigs} />;
