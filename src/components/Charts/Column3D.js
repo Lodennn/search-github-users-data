@@ -16,8 +16,8 @@ const Column2D = (props) => {
           // Chart Configuration
           chart: {
             caption: "Most Popular",
-            xAxisName: "Stars",
-            yAxisName: "Repos",
+            xAxisName: "Repos",
+            yAxisName: "Stars",
             xAxisNameFontSize: "16px",
             xAxisNameFontSize: "16px",
             theme: "fusion",
