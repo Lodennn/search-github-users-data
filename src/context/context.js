@@ -15,55 +15,6 @@ export default (props) => {
   const [request, setRequest] = useState({});
   const [httpData, setHttpData] = useState({ error: null, isLoading: false });
 
-  const fetchUserData = useCallback(
-    async (searchValue) => {
-      setHttpData({
-        error: null,
-        isLoading: true,
-      });
-      try {
-        const responseUserData = await fetch(`${rootUrl}/users/${searchValue}`);
-        const responseReposData = await fetch(
-          `${rootUrl}/users/${searchValue}/repos?per_page=100`
-        );
-        const responseFollowersData = await fetch(
-          `${rootUrl}/users/${searchValue}/followers`
-        );
-
-        if (!responseUserData.ok) throw new Error("User not found");
-        if (!responseReposData.ok) throw new Error("Repos not found");
-        if (!responseFollowersData.ok) throw new Error("Followers not found");
-        setHttpData({
-          ...httpData,
-          isLoading: false,
-        });
-        const [userResponse, reposResponse, followersResponse] =
-          await Promise.all([
-            responseUserData,
-            responseReposData,
-            responseFollowersData,
-          ]);
-        setHttpData({
-          ...httpData,
-          isLoading: false,
-        });
-        const userData = await responseUserData.json();
-        const reposData = await reposResponse.json();
-        const followersData = await followersResponse.json();
-
-        setGithubUser(userData);
-        setGithubRepos(reposData);
-        setGithubFollowers(followersData);
-      } catch (err) {
-        setHttpData({
-          ...httpData,
-          error: err.message,
-        });
-      }
-    },
-    [httpData]
-  );
-
   const checkRequests = useCallback(() => {
     setHttpData({
       isLoading: true,
@@ -88,7 +39,53 @@ export default (props) => {
           error: err.message,
         });
       });
-  }, [rootUrl, setHttpData]);
+  }, [rootUrl]);
+
+  const fetchUserData = useCallback(async (searchValue) => {
+    setHttpData({
+      error: null,
+      isLoading: true,
+    });
+    try {
+      const responseUserData = await fetch(`${rootUrl}/users/${searchValue}`);
+      const responseReposData = await fetch(
+        `${rootUrl}/users/${searchValue}/repos?per_page=100`
+      );
+      const responseFollowersData = await fetch(
+        `${rootUrl}/users/${searchValue}/followers`
+      );
+
+      if (!responseUserData.ok) throw new Error("User not found");
+      if (!responseReposData.ok) throw new Error("Repos not found");
+      if (!responseFollowersData.ok) throw new Error("Followers not found");
+      setHttpData({
+        ...httpData,
+        isLoading: false,
+      });
+      const [userResponse, reposResponse, followersResponse] =
+        await Promise.all([
+          responseUserData,
+          responseReposData,
+          responseFollowersData,
+        ]);
+      setHttpData({
+        ...httpData,
+        isLoading: false,
+      });
+      const userData = await userResponse.json();
+      const reposData = await reposResponse.json();
+      const followersData = await followersResponse.json();
+
+      setGithubUser(userData);
+      setGithubRepos(reposData);
+      setGithubFollowers(followersData);
+    } catch (err) {
+      setHttpData({
+        ...httpData,
+        error: err.message,
+      });
+    }
+  }, []);
 
   useEffect(checkRequests, [checkRequests]);
 

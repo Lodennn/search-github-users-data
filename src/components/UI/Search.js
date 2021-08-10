@@ -7,7 +7,7 @@ const Search = (props) => {
   const {
     request: { limit, remaining },
     fetchData,
-    httpData: { isLoading, error },
+    httpData: { error },
     setHttpData,
   } = useContext(GithubContext);
   const searchInput = useRef();

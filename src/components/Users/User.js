@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Card from "../UI/Card";
 import Followers from "../Followers/Followers";
 
-const User = (props) => {
+const User = () => {
   return (
     <section className="section">
       <Wrapper className="section-center">

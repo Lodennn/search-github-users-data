@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import DoughnutChart from "../Charts/Doughnut2d";
 import { GithubContext } from "../../context/context";
@@ -13,8 +13,7 @@ const Repos = () => {
   // 1st Approach
   let chartData = repos.reduce((acc, item) => {
     const { language, stargazers_count: stars } = item;
-    if (!language) return;
-
+    if (!language) return acc;
     if (!acc[language]) {
       acc[language] = {
         label: language,
@@ -29,6 +28,8 @@ const Repos = () => {
     }
     return acc;
   }, {});
+
+  console.log(repos, chartData);
 
   const sortBy = (data, type) => {
     const sortedData = Object.values(data)
