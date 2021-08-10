@@ -29,8 +29,6 @@ const Repos = () => {
     return acc;
   }, {});
 
-  console.log(repos, chartData);
-
   const sortBy = (data, type) => {
     const sortedData = Object.values(data)
       .sort((a, b) => b[type] - a[type])

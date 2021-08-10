@@ -1,9 +1,37 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import LoadingSpinner from "../../assets/preloader.gif";
 
 const Navbar = () => {
-  return <Wrapper>navbar component</Wrapper>;
+  const { isLoading, isAuthenticated, user, logout } = useAuth0();
+
+  const logoutHandler = () => {
+    logout({ returnTo: window.location.origin });
+  };
+
+  const isUser = isAuthenticated && user;
+  const username = isUser && (user.name || user.nickname);
+
+  if (isLoading)
+    return (
+      <Wrapper>
+        <img src={LoadingSpinner} alt="Loading..." />
+      </Wrapper>
+    );
+
+  return (
+    <Wrapper>
+      {isUser && <img src={user.picture} alt={user.name} />}
+      {isUser && (
+        <h4>
+          Welcome, <strong>{username.toUpperCase()}</strong>
+        </h4>
+      )}
+      {isUser && <button onClick={logoutHandler}>Logout</button>}
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.nav`
