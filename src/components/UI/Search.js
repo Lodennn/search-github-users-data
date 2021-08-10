@@ -1,10 +1,57 @@
-import React from "react";
+import React, { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
 import { GithubContext } from "../../context/context";
 
-const Search = () => {
-  return <h2>search component</h2>;
+const Search = (props) => {
+  const {
+    request: { limit, remaining },
+    fetchData,
+    httpData: { isLoading, error },
+    setHttpData,
+  } = useContext(GithubContext);
+  const searchInput = useRef();
+
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+    if (!searchInput.current.value) {
+      // setHttpData("Please fill out the search input");
+      setHttpData({
+        isLoading: true,
+        error: "Please fill out the search input",
+      });
+      return;
+    }
+    if (searchInput?.current?.value) {
+      fetchData(searchInput.current.value).catch((err) => {
+        setHttpData({
+          isLoading: true,
+          error: err.message,
+        });
+      });
+    } else {
+      searchInput.current.value = "";
+    }
+  };
+  return (
+    <Wrapper className="section section-center">
+      {!!error && <ErrorWrapper>{error && <p>{error}</p>}</ErrorWrapper>}
+      <form onSubmit={submitFormHandler}>
+        <div className="form-control">
+          <MdSearch />
+          <input
+            ref={searchInput}
+            type="text"
+            placeholder="enter github username"
+          />
+          {remaining > 0 && <button type="submit">Search</button>}
+        </div>
+      </form>
+      <h3>
+        requests: {remaining} / {limit}
+      </h3>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`
@@ -79,7 +126,6 @@ const Wrapper = styled.div`
 
 const ErrorWrapper = styled.article`
   position: absolute;
-  width: 90vw;
   top: 0;
   left: 0;
   transform: translateY(-100%);
@@ -87,7 +133,9 @@ const ErrorWrapper = styled.article`
   p {
     color: red;
     letter-spacing: var(--spacing);
+    display: inline-block;
+    margin: 0;
   }
 `;
 
-export default Search;
+export default React.memo(Search);

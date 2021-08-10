@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Card from "../UI/Card";
 import Followers from "../Followers/Followers";
 
-const User = () => {
+const User = (props) => {
   return (
     <section className="section">
       <Wrapper className="section-center">
