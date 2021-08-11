@@ -24,15 +24,13 @@ const Wrapper = styled.section`
 const AuthLogin = () => {
   const { loginWithRedirect } = useAuth0();
 
-  const loginHandler = () => {};
-
   return (
     <Wrapper>
       <div className="container">
         <img src={loginImg} alt="github users login" />
         <h1>Github users</h1>
         <button className="btn" onClick={loginWithRedirect}>
-          Login
+          Login / Sign up
         </button>
       </div>
     </Wrapper>
