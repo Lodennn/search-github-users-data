@@ -19,7 +19,7 @@ const Bar2D = (props) => {
             xAxisName: "Forks",
             yAxisName: "Repos",
             xAxisNameFontSize: "16px",
-            xAxisNameFontSize: "16px",
+            yAxisNameFontSize: "16px",
             theme: "fusion",
           },
           // Chart Data

@@ -1,9 +1,9 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef } from "react";
 import styled from "styled-components";
 import { MdSearch } from "react-icons/md";
 import { GithubContext } from "../../context/context";
 
-const Search = (props) => {
+const Search = () => {
   const {
     request: { limit, remaining },
     fetchData,

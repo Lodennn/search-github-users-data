@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from "react";
+import React, { useContext } from "react";
 import { GithubContext } from "../../context/context";
 import styled from "styled-components";
 import { MdBusiness, MdLocationOn, MdLink } from "react-icons/md";
@@ -7,10 +7,8 @@ const Card = () => {
   const {
     user: {
       login,
-      name,
       avatar_url,
       html_url,
-      className,
       company,
       blog,
       bio,

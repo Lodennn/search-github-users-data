@@ -19,7 +19,7 @@ const Column2D = (props) => {
             xAxisName: "Repos",
             yAxisName: "Stars",
             xAxisNameFontSize: "16px",
-            xAxisNameFontSize: "16px",
+            yAxisNameFontSize: "16px",
             theme: "fusion",
           },
           // Chart Data

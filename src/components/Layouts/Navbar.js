@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import LoadingSpinner from "../../assets/preloader.gif";

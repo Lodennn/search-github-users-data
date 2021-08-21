@@ -10,8 +10,6 @@ import AuthWrapper from "./pages/AuthWrapper";
 function App() {
   const { isAuthenticated, user } = useAuth0();
   const isUser = isAuthenticated && user;
-  // const isUser = false;
-  console.log(isUser);
   return (
     <AuthWrapper>
       <Switch>

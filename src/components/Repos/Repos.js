@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import DoughnutChart from "../Charts/Doughnut2d";
 import { GithubContext } from "../../context/context";

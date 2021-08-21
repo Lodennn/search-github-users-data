@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import mockUser from "./mockData.js/mockUser";
 import mockRepos from "./mockData.js/mockRepos";
 import mockFollowers from "./mockData.js/mockFollowers";
@@ -15,7 +15,7 @@ export default (props) => {
   const [request, setRequest] = useState({});
   const [httpData, setHttpData] = useState({ error: null, isLoading: false });
 
-  const checkRequests = useCallback(() => {
+  const checkRequests = () => {
     setHttpData({
       isLoading: true,
       error: null,
@@ -39,9 +39,9 @@ export default (props) => {
           error: err.message,
         });
       });
-  }, [rootUrl]);
+  };
 
-  const fetchUserData = useCallback(async (searchValue) => {
+  const fetchUserData = async (searchValue) => {
     setHttpData({
       error: null,
       isLoading: true,
@@ -85,9 +85,9 @@ export default (props) => {
         error: err.message,
       });
     }
-  }, []);
+  };
 
-  useEffect(checkRequests, [checkRequests]);
+  useEffect(checkRequests, []);
 
   const contextValue = {
     user: githubUser,
